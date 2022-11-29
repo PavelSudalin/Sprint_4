@@ -28,7 +28,7 @@ public class OrderScooter {
 
     @Before
     public void setUp() {
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver();
         driver.get("https://qa-scooter.praktikum-services.ru/");
 
     }
