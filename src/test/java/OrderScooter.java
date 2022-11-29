@@ -1,4 +1,5 @@
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -24,6 +25,13 @@ public class OrderScooter {
     private String comment;
     private String orderModalWindow = "Заказ оформлен";
 
+    @Before
+    public void setUp() {
+        driver = new ChromeDriver();
+        driver.get("https://qa-scooter.praktikum-services.ru/");
+
+    }
+
     public OrderScooter(String firstName, String secondName, String address, String phoneNumber,
                         String date, String color, String comment) {
         this.firstName = firstName;
@@ -35,7 +43,7 @@ public class OrderScooter {
         this.comment = comment;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "{index}: {0}, {1}")
     public static Object[][] getUserData() {
         return new Object[][]{
                 {"Александр", "Пушкин", "Цветной бульвар 16", "84953574758", "25.11.2022", "black", "Как можно быстрее"},
@@ -44,13 +52,34 @@ public class OrderScooter {
     }
 
     @Test
-    public void successfulScooterOrder() {
-        driver = new ChromeDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+    public void successfulScooterOrderHeadButton() {
         HomePage homePage = new HomePage(driver);
         OrderFirstPage orderFirstPage = new OrderFirstPage(driver);
         OrderSecondPage orderSecondPage = new OrderSecondPage(driver);
         homePage.clickOrderHeadButton();
+        orderFirstPage.inputFirstName(firstName)
+                .inputSecondName(secondName)
+                .inputAddress(address)
+                .inputMetro()
+                .inputPhone(phoneNumber)
+                .clickNextButton();
+        orderSecondPage.insertDate(date)
+                .insertLeaseTerm()
+                .insertColor(color)
+                .inputCommentForCourier(comment)
+                .clickOrderButton()
+                .waitForLoadModalWindow()
+                .clickOrderButtonYes();
+
+        assertThat(orderSecondPage.getTextOrderIsProcessed(), containsString(orderModalWindow));
+    }
+
+    @Test
+    public void successfulScooterOrderBottomButton() {
+        HomePage homePage = new HomePage(driver);
+        OrderFirstPage orderFirstPage = new OrderFirstPage(driver);
+        OrderSecondPage orderSecondPage = new OrderSecondPage(driver);
+        homePage.clickOrderBottomButton();
         orderFirstPage.inputFirstName(firstName)
                 .inputSecondName(secondName)
                 .inputAddress(address)

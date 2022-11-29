@@ -1,6 +1,5 @@
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,12 +8,9 @@ import ru.yandex.praktikum.pages.HomePage;
 import ru.yandex.praktikum.pages.OrderFirstPage;
 import ru.yandex.praktikum.pages.OrderSecondPage;
 import ru.yandex.praktikum.pages.OrderStatusPage;
-import static org.junit.Assert.assertEquals;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
-
-import java.util.List;
 
 public class FindOrder {
     private WebDriver driver;
@@ -76,8 +72,6 @@ public class FindOrder {
 
             assertThat(orderStatusPage.getTextOrderCancelModalText(), containsString("Заказ отменён"));
         }
-
-
 
     @After
     public void teardown() {

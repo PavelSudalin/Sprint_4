@@ -22,7 +22,6 @@ public class OrderSecondPage {
     private By backButton = By.xpath(".//button[text() = 'Назад']");
     private By orderButton = By.xpath(".//button[2][text() = 'Заказать']");
     private By modalOrderButtonYes = By.xpath(".//button[text() = 'Да']");
-    private By modalOrderButtonNo = By.xpath(".//button[text() = 'Нет']");
     private By modalWindow = By.xpath(".//div[text() = 'Хотите оформить заказ?']");
     private By orderIsProcessed = By.className("Order_ModalHeader__3FDaJ");
     private By lookOrderStatusButton = By.xpath(".//button[text() = 'Посмотреть статус']");

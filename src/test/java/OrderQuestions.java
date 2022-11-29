@@ -8,23 +8,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import ru.yandex.praktikum.pages.HomePage;
 import static org.junit.Assert.assertEquals;
 
+@RunWith(Parameterized.class)
 public class OrderQuestions {
     private WebDriver driver;
-    private String expectedAnswersHowMuchIsCostQuestion = "Сутки — 400 рублей. Оплата курьеру — наличными или картой.";
-    private String expectedSeveralScootersAtOnceQuestion = "Пока что у нас так: один заказ — один самокат. " +
-            "Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.";
-    private String expectedRentalTimeCalculationQuestion = "Допустим, вы оформляете заказ на 8 мая. " +
-            "Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру." +
-            " Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.";
-    private String expectedOrderScooterRightForTodayQuestion = "Только начиная с завтрашнего дня. Но скоро станем расторопнее.";
-    private String expectedExtendOrderOrReturnScooterQuestion = "Пока что нет! Но если что-то срочное — всегда можно позвонить " +
-            "в поддержку по красивому номеру 1010.";
-    private String expectedScooterChargingQuestion = "Самокат приезжает к вам с полной зарядкой. " +
-            "Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.";
-    private String expectedScooterCancellationQuestion = "Да, пока самокат не привезли. Штрафа не будет, " +
-            "объяснительной записки тоже не попросим. Все же свои.";
-    private String expectedScooterDeliveryQuestion = "Да, обязательно. Всем самокатов! И Москве, и Московской области.";
-
+    private String expected;
+    private String number;
 
     @Before
     public void setUp() {
@@ -33,54 +21,35 @@ public class OrderQuestions {
 
     }
 
-    @Test
-    public void checkingAnswersHowMuchIsCostQuestion() {
-        HomePage actual = new HomePage(driver);
-        assertEquals(expectedAnswersHowMuchIsCostQuestion, actual.getTextHowMuchIsCostQuestion());
+    public OrderQuestions(String expected, String number) {
+        this.expected = expected;
+        this.number = number;
+    }
+
+    @Parameterized.Parameters(name = "{index}: {0}")
+    public static Object[][] checkQuestionsAnswer() {
+        return new Object[][] {
+                {"Сутки — 400 рублей. Оплата курьеру — наличными или картой.", "0"},
+                {"Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями," +
+                        " можете просто сделать несколько заказов — один за другим.", "1"},
+                {"Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня." +
+                        " Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. " +
+                        "Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.", "2"},
+                {"Только начиная с завтрашнего дня. Но скоро станем расторопнее.", "3"},
+                {"Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010.", "4"},
+                {"Самокат приезжает к вам с полной зарядкой. " +
+                        "Этого хватает на восемь суток — даже если будете кататься без передышек и во сне." +
+                        " Зарядка не понадобится.", "5"},
+                {"Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.", "6"},
+                {"Да, обязательно. Всем самокатов! И Москве, и Московской области.", "7"}
+        };
     }
 
     @Test
-    public void checkingSeveralScootersAtOnceQuestion() {
-        HomePage actual = new HomePage(driver);
-        assertEquals(expectedSeveralScootersAtOnceQuestion, actual.getTextSeveralScootersAtOnceQuestion());
+    public void checkingAnswersQuestions() {
+        HomePage homePage = new HomePage(driver);
+        assertEquals(expected, homePage.getTextHomePageQuestions(number));
     }
-
-    @Test
-    public void checkingRentalTimeCalculationQuestion() {
-        HomePage actual = new HomePage(driver);
-        assertEquals(expectedRentalTimeCalculationQuestion, actual.getTextRentalTimeCalculationQuestion());
-    }
-
-    @Test
-    public void checkingOrderScooterRightForTodayQuestion() {
-        HomePage actual = new HomePage(driver);
-        assertEquals(expectedOrderScooterRightForTodayQuestion, actual.getTextOrderScooterRightForTodayQuestion());
-    }
-
-    @Test
-    public void checkingExtendOrderOrReturnScooterQuestion() {
-        HomePage actual = new HomePage(driver);
-        assertEquals(expectedExtendOrderOrReturnScooterQuestion, actual.getTextExtendOrderOrReturnScooterQuestion());
-    }
-
-    @Test
-    public void checkingScooterChargingQuestion() {
-        HomePage actual = new HomePage(driver);
-        assertEquals(expectedScooterChargingQuestion, actual.getTextScooterChargingQuestion());
-    }
-
-    @Test
-    public void checkingScooterCancellationQuestion() {
-        HomePage actual = new HomePage(driver);
-        assertEquals(expectedScooterCancellationQuestion, actual.getTextScooterCancellationQuestion());
-    }
-
-    @Test
-    public void checkingScooterDeliveryQuestion() {
-        HomePage actual = new HomePage(driver);
-        assertEquals(expectedScooterDeliveryQuestion, actual.getTextScooterDeliveryQuestion());
-    }
-
 
     @After
     public void teardown() {
