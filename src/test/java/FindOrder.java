@@ -46,7 +46,7 @@ public class FindOrder {
             OrderStatusPage orderStatusPage = new OrderStatusPage(driver);
             OrderFirstPage orderFirstPage = new OrderFirstPage(driver);
             OrderSecondPage orderSecondPage = new OrderSecondPage(driver);
-            homePage.clickOrderHeadButton();
+            homePage.clickOrderButton("HeadButton");
 
             orderFirstPage.inputFirstName(firstName)
                     .inputSecondName(secondName)

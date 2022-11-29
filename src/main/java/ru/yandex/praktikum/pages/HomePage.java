@@ -22,15 +22,15 @@ public class HomePage {
     public HomePage(WebDriver driver) {
         this.driver = driver;
     }
-    public HomePage clickOrderHeadButton() {
-        driver.findElement(orderHeadButton).click();
-        return this;
-    }
 
-    public HomePage clickOrderBottomButton(){
-        WebElement element = driver.findElement(orderBottomButton);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        driver.findElement(orderBottomButton).click();
+    public HomePage clickOrderButton(String button){
+        if ("bottomButton".equals(button)) {
+            WebElement element = driver.findElement(orderBottomButton);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            driver.findElement(orderBottomButton).click();
+        } else {
+            driver.findElement(orderHeadButton).click();
+        }
         return this;
     }
     public HomePage clickOrderStatusButton() {
