@@ -9,7 +9,7 @@ import ru.yandex.praktikum.pages.HomePage;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class OrderQuestions {
+public class OrderQuestionsTest {
     private WebDriver driver;
     private String expected;
     private String number;
@@ -21,7 +21,7 @@ public class OrderQuestions {
 
     }
 
-    public OrderQuestions(String expected, String number) {
+    public OrderQuestionsTest(String expected, String number) {
         this.expected = expected;
         this.number = number;
     }
