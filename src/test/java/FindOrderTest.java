@@ -3,7 +3,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.yandex.praktikum.pages.HomePage;
 import ru.yandex.praktikum.pages.OrderFirstPage;
 import ru.yandex.praktikum.pages.OrderSecondPage;
@@ -12,7 +11,7 @@ import ru.yandex.praktikum.pages.OrderStatusPage;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class FindOrder {
+public class FindOrderTest {
     private WebDriver driver;
     private String firstName = "Сергей";
     private String secondName = "Пушкин";

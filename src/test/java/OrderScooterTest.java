@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.yandex.praktikum.pages.HomePage;
 import ru.yandex.praktikum.pages.OrderFirstPage;
 import ru.yandex.praktikum.pages.OrderSecondPage;
@@ -14,7 +13,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Parameterized.class)
-public class OrderScooter {
+public class OrderScooterTest {
     private WebDriver driver;
     private String firstName;
     private String secondName;
@@ -33,8 +32,8 @@ public class OrderScooter {
 
     }
 
-    public OrderScooter(String button, String firstName, String secondName, String address, String phoneNumber,
-                        String date, String color, String comment) {
+    public OrderScooterTest(String button, String firstName, String secondName, String address, String phoneNumber,
+                            String date, String color, String comment) {
         this.button = button;
         this.firstName = firstName;
         this.secondName = secondName;
